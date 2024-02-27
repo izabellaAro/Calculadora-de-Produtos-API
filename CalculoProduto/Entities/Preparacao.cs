@@ -17,6 +17,11 @@ namespace CalculoProduto.Entities
         [NotMapped]
         public double TotalValorInsumos => InsumosPreparacao.Sum(x => x.Valor);
 
+        public Preparacao()
+        {
+            
+        }
+
         public void CriarPrecificacao(double valorMaoObra, double percentualLucro)
         {
             Precificacao = new Precificacao(TotalValorMP, TotalValorInsumos,

@@ -2,12 +2,18 @@
 {
     public class Precificacao
     {
+        public int Id { get; set; }
         public double CustoMP { get; private set; }
         public double CustoInsumo { get; private set; }
         public double CustoMO { get; private set; }
         public double PercentualLucro { get; private set; }
         public double TotalCusto { get; private set; }
         public double TotalVenda { get; private set; }
+
+        public Precificacao()
+        {
+            
+        }
 
         public Precificacao(double custoMP, double custoInsumo, double custoMO, double percentualLucro)
         {

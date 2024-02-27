@@ -8,5 +8,10 @@
         public int InsumoIndiretoId { get; set; }
         public InsumoIndireto Insumo { get; set; }
         public double Valor { get; set; }
+
+        public InsumoPreparacao()
+        {
+            
+        }
     }
 }

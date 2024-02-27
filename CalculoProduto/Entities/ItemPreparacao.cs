@@ -9,5 +9,10 @@
         public MateriaPrima MateriaPrima { get; set; }
         public double Qnt { get; set; }
         public double Valor { get; set; }
+
+        public ItemPreparacao()
+        {
+            
+        }
     }
 }

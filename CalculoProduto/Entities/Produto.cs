@@ -6,6 +6,10 @@
         public string Nome { get; set; }
         public IList<Preparacao> Preparacoes { get; set; } = new List<Preparacao>();
 
+        public Produto()
+        {
+            
+        }
         public Produto(string nome, Preparacao preparacao)
         {
             Nome = nome;

@@ -8,6 +8,7 @@ namespace CalculoProduto.DataAccess.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Precificacao> builder)
         {
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.CustoMP).IsRequired();
             builder.Property(x => x.CustoMO).IsRequired();
             builder.Property(x => x.CustoInsumo);
