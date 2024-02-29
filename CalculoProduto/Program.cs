@@ -12,9 +12,11 @@ builder.Services.AddDbContext<ProdutoContext>(opts => opts.UseMySql(connectionSt
 
 // Add services to the container.
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<IMateriaPrimaService,MateriaPrimaService>();
 
 // Add repositories
 builder.Services.AddScoped<IInsumoIndiretoRepository, InsumoIndiretoRepository>();
+builder.Services.AddScoped<IMateriaPrimaRepository, MateriaPrimaRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

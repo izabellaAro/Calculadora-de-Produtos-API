@@ -7,9 +7,13 @@
         public double Qnts { get; set; }
         public double Valor { get; set; }
 
-        public MateriaPrima()
+        public MateriaPrima() { }
+
+        public MateriaPrima(string nome, double qnts, double valor )
         {
-            
+            Nome = nome;
+            Qnts = qnts;
+            Valor = valor;
         }
     }
 }
