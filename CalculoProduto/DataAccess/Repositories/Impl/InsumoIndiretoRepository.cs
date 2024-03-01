@@ -11,5 +11,10 @@ namespace CalculoProduto.DataAccess.Repositories.Impl
         {
             return await _dbSet.ToListAsync();
         }
+
+        public async Task<InsumoIndireto> BuscaInsIndiretoId(int id)
+        {
+            return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

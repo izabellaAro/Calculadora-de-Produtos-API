@@ -10,6 +10,7 @@ namespace CalculoProduto.DataAccess.Persistence.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Especificao).IsRequired();
+            builder.Property(x => x.Valor).IsRequired();
         }
     }
 }
