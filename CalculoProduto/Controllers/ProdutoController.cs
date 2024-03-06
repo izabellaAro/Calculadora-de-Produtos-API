@@ -1,6 +1,5 @@
 ﻿using CalculoProduto.Application.Services;
-using CalculoProduto.Entities;
-using CalculoProduto.Services.Impl;
+using CalculoProduto.Models.Produto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculoProduto.Controllers
@@ -11,16 +10,31 @@ namespace CalculoProduto.Controllers
     {
         private readonly IProdutoService _produtoService;
 
-         public ProdutoController(IProdutoService produtoService)
+        public ProdutoController(IProdutoService produtoService)
         {
             _produtoService = produtoService;
         }
 
         [HttpPost]
-        public IActionResult CriarPreparacao()
+        public async Task<IActionResult> CadastrarProduto(CreateProdutoDto produtoDto)
         {
-            _produtoService.CadastrarProduto();
+            await _produtoService.CadastrarProduto(produtoDto);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<ReadProdutoDto>> ListaProdutos()
+        {
+            return await _produtoService.ListaProdutos();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> BuscaProdutoId(int id)
+        {
+            var produto = await _produtoService.BuscaProdutoId(id);
+            if (produto == null) return NotFound();
+
+            return Ok(produto);
         }
 
     }

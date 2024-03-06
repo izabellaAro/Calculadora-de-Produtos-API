@@ -2,8 +2,9 @@
 
 namespace CalculoProduto.DataAccess.Repositories
 {
-    public interface IProdutoRepository
+    public interface IProdutoRepository : IBaseRepository<Produto>
     {
-        Task<IEnumerable<Produto>> Listar(); 
+        Task<IEnumerable<Produto>> Listar();
+        Task<Produto> BuscaProdutoId(int id);
     }
 }

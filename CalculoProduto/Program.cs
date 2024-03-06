@@ -19,6 +19,7 @@ builder.Services.AddScoped<IInsumoIndiretoService, InsumoIndiretoService>();
 builder.Services.AddScoped<IInsumoIndiretoRepository, InsumoIndiretoRepository>();
 builder.Services.AddScoped<IMateriaPrimaRepository, MateriaPrimaRepository>();
 builder.Services.AddScoped<IInsumoIndiretoRepository, InsumoIndiretoRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

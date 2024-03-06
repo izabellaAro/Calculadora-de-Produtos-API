@@ -1,39 +1,44 @@
 ﻿using CalculoProduto.Application.Services;
+using CalculoProduto.DataAccess.Repositories;
 using CalculoProduto.Entities;
+using CalculoProduto.Models.Produto;
 
 namespace CalculoProduto.Application.Services.Impl
 {
     public class ProdutoService : IProdutoService
     {
-        public async Task CadastrarProduto()
+        private readonly IProdutoRepository _produtoRepository;
+        public ProdutoService(IProdutoRepository produtoRepository)
         {
-            // Criar insumos
-            var insumosPreparacao = new List<InsumoPreparacao>();
-            var insumoGas = new InsumoIndireto { Especificao = "Gás" };
+            _produtoRepository = produtoRepository;
+        }
+        
+        public async Task CadastrarProduto(CreateProdutoDto produtoDto)
+        {
+            var novoProduto = new Produto(produtoDto.Nome);
+            await _produtoRepository.AddAsync(novoProduto);
+        }
 
-            insumosPreparacao.Add(new InsumoPreparacao { Insumo = insumoGas, Valor = 5 });
+        public async Task<ReadProdutoDto> BuscaProdutoId(int id)
+        {
+            var produto = await _produtoRepository.BuscaProdutoId(id);
+            if (produto == null) return null;
 
-            // Criar materias primas
-            var farinhaTrigo = new MateriaPrima { Nome = "Farinha De Trigo", Qnts = 3, Valor = 10 };
-
-            // Criar intens preparacao
-            var itensPreparacao = new List<ItemPreparacao>();
-            var farinhaBolo = new ItemPreparacao { MateriaPrima = farinhaTrigo, Qnt = 1, Valor = 3.3 };
-
-            itensPreparacao.Add(farinhaBolo);
-            // Criar preparacao
-            var preparacaoBolo = new Preparacao
+            return new ReadProdutoDto
             {
-                ItensPreparacao = itensPreparacao,
-                InsumosPreparacao = insumosPreparacao
+                Id = produto.Id,
+                Nome = produto.Nome
             };
+        }
 
-            // Criar Produto
-            var boloChocolate = new Produto("Bolo de Chocolate", preparacaoBolo);
-
-            const double valorMO = 15;
-            const double percentualLucro = 25;
-            boloChocolate.CriarPrecificacao(valorMO, percentualLucro);
+        public async Task<IEnumerable<ReadProdutoDto>> ListaProdutos()
+        {
+            var listaProdutos = await _produtoRepository.Listar();
+            return listaProdutos.Select(produto => new ReadProdutoDto
+            {
+                Id = produto.Id,
+                Nome = produto.Nome
+            }).ToList();
         }
     }
 }

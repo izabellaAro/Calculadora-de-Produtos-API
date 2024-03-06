@@ -10,10 +10,10 @@
         {
             
         }
-        public Produto(string nome, Preparacao preparacao)
+        public Produto(string nome)
         {
             Nome = nome;
-            Preparacoes.Add(preparacao);
+            //Preparacoes.Add(preparacao);
         }
 
         public void CriarPrecificacao(double valorMaoObra, double percentualLucro)
