@@ -9,7 +9,18 @@ namespace CalculoProduto.DataAccess.Repositories.Impl
 
         public async Task<IEnumerable<Preparacao>> Listar()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet
+                .Include(preparacao => preparacao.ItensPreparacao)
+                .Include(preparacao => preparacao.InsumosPreparacao)
+                .ToListAsync();
+        }
+
+        public async Task<Preparacao> BuscaPreparacaoId(int id)
+        {
+            return await _dbSet
+                .Include(preparacao => preparacao.ItensPreparacao)
+                .Include(preparacao => preparacao.InsumosPreparacao)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

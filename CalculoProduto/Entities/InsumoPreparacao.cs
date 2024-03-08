@@ -13,5 +13,12 @@
         {
             
         }
+
+        public InsumoPreparacao(Preparacao preparacao, int insumoIndiretoId, double valor)
+        {
+            Preparacao = preparacao;
+            InsumoIndiretoId = insumoIndiretoId;
+            Valor = valor;
+        }
     }
 }

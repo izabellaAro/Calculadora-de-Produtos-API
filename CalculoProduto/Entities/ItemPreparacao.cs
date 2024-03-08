@@ -14,5 +14,13 @@
         {
             
         }
+
+        public ItemPreparacao(Preparacao preparacao, int materiaPrimaId, double qnt, double valor)
+        {
+            Preparacao = preparacao;
+            MateriaPrimaId = materiaPrimaId;
+            Qnt = qnt;
+            Valor = valor;
+        }
     }
 }

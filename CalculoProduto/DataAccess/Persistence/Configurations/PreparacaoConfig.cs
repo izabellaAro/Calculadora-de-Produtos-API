@@ -11,7 +11,7 @@ namespace CalculoProduto.DataAccess.Persistence.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Nome).IsRequired();
             builder.HasOne(x => x.Produto).WithMany(p => p.Preparacoes).HasForeignKey(x => x.ProdutoId).IsRequired();
-            builder.HasOne(x => x.Precificacao).WithOne().HasForeignKey<Preparacao>(x => x.PrecificacaoId);
+            builder.HasOne(x => x.Precificacao).WithOne(p => p.Preparacao).HasForeignKey<Precificacao>(x => x.PreparacaoId);
         }
     }
 }
