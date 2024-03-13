@@ -16,11 +16,5 @@
             //Preparacoes.Add(preparacao);
         }
 
-        public void CriarPrecificacao(double valorMaoObra, double percentualLucro)
-        {
-            var preparacao = Preparacoes.FirstOrDefault();
-
-            preparacao.CriarPrecificacao(valorMaoObra, percentualLucro);
-        }
     }
 }

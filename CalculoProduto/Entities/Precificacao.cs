@@ -9,10 +9,19 @@
         public double PercentualLucro { get; private set; }
         public double TotalCusto { get; private set; }
         public double TotalVenda { get; private set; }
+        public Preparacao Preparacao { get; set; }
+        public int PreparacaoId { get; set; }
 
         public Precificacao()
         {
             
+        }
+
+        public Precificacao(int id, double custoMO, double percentualLucro)
+        {
+            Id = id;
+            CustoMO = custoMO;
+            PercentualLucro = percentualLucro;
         }
 
         public Precificacao(double custoMP, double custoInsumo, double custoMO, double percentualLucro)

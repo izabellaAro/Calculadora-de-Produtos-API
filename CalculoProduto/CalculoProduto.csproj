@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\InsumoPreparacao\**" />
+    <Compile Remove="Models\ItemPreparacao\**" />
+    <Content Remove="Models\InsumoPreparacao\**" />
+    <Content Remove="Models\ItemPreparacao\**" />
+    <EmbeddedResource Remove="Models\InsumoPreparacao\**" />
+    <EmbeddedResource Remove="Models\ItemPreparacao\**" />
+    <None Remove="Models\InsumoPreparacao\**" />
+    <None Remove="Models\ItemPreparacao\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.16">

@@ -1,5 +1,6 @@
 ﻿using CalculoProduto.DataAccess.Repositories;
 using CalculoProduto.Entities;
+using CalculoProduto.Models.Precificacao;
 using CalculoProduto.Models.Preparacao;
 
 namespace CalculoProduto.Application.Services.Impl
@@ -7,14 +8,18 @@ namespace CalculoProduto.Application.Services.Impl
     public class PreparacaoService : IPreparacaoService
     {
         private readonly IPreparacaoRepository _preparacaoRepository;
+        private readonly IProdutoRepository _produtoRepository;
 
-        public PreparacaoService(IPreparacaoRepository preparacaoRepository)
+        public PreparacaoService(IPreparacaoRepository preparacaoRepository, IProdutoRepository produtoRepository)
         {
             _preparacaoRepository = preparacaoRepository;
+            _produtoRepository = produtoRepository;
         }
 
         public async Task CadastrarPreparacao(CreatePreparacaoDto preparacaoDto)
         {
+            var produto = await _produtoRepository.BuscaProdutoId(preparacaoDto.ProdutoId);
+
             var novaPreparacao = new Preparacao(preparacaoDto.Id, preparacaoDto.Nome, preparacaoDto.ProdutoId);
             foreach (var item in preparacaoDto.ItensPreparacao)
             {
@@ -25,6 +30,8 @@ namespace CalculoProduto.Application.Services.Impl
             {
                 novaPreparacao.AdicionarInsumo(insumo.InsumoIndiretoId, insumo.Valor);
             }
+
+            novaPreparacao.CriarPrecificacao(preparacaoDto.ValorMaoObra, preparacaoDto.PercentualLucro);
 
             await _preparacaoRepository.AddAsync(novaPreparacao);
         }
@@ -51,6 +58,11 @@ namespace CalculoProduto.Application.Services.Impl
                         InsumoIndiretoId = insumo.InsumoIndiretoId,
                         Valor = insumo.Valor
                     }).ToList(),
+                PrecificacaoDto = new ReadPrecificacaoDto
+                {
+                    CustoMO = preparacao?.Precificacao?.CustoMO ?? 0,
+                    PercentualLucro = preparacao?.Precificacao?.PercentualLucro ?? 0
+                }
             }).ToList();
         }
 

@@ -12,6 +12,7 @@ namespace CalculoProduto.DataAccess.Repositories.Impl
             return await _dbSet
                 .Include(preparacao => preparacao.ItensPreparacao)
                 .Include(preparacao => preparacao.InsumosPreparacao)
+                .Include(preparacao => preparacao.Precificacao)
                 .ToListAsync();
         }
 

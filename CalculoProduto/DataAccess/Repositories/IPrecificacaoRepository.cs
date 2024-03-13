@@ -1,8 +1,9 @@
-﻿using CalculoProduto.Entities;
+﻿using CalculoProduto.DataAccess.Repositories.Impl;
+using CalculoProduto.Entities;
 
 namespace CalculoProduto.DataAccess.Repositories
 {
-    public interface IPrecificacaoRepository
+    public interface IPrecificacaoRepository : IBaseRepository<Precificacao>
     {
         Task<IEnumerable<Precificacao>> Listar();
     }

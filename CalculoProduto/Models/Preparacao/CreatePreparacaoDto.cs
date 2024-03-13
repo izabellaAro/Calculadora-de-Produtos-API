@@ -5,6 +5,8 @@
         public int Id { get; set; }
         public string Nome { get; set; }
         public int ProdutoId { get; set; }
+        public double ValorMaoObra { get; set; }
+        public double PercentualLucro { get; set; }
         public List<ItemPreparacaoDto> ItensPreparacao { get; set; }
         public List<InsumoPreparacaoDto> InsumosPreparacao { get; set; }
     }
