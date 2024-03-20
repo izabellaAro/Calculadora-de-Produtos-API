@@ -1,4 +1,5 @@
-﻿using CalculoProduto.DataAccess.Repositories;
+﻿using AutoMapper;
+using CalculoProduto.DataAccess.Repositories;
 using CalculoProduto.Entities;
 using CalculoProduto.Models.MateriaPrima;
 
@@ -7,10 +8,12 @@ namespace CalculoProduto.Application.Services.Impl
     public class MateriaPrimaService : IMateriaPrimaService
     {
         private readonly IMateriaPrimaRepository _materiaPrimaRepository;
+        private readonly IMapper _mapper;
 
-        public MateriaPrimaService(IMateriaPrimaRepository materiaPrimaRepository)
+        public MateriaPrimaService(IMateriaPrimaRepository materiaPrimaRepository, IMapper mapper)
         {
             _materiaPrimaRepository = materiaPrimaRepository;
+            _mapper = mapper;
         }
 
         public async Task<ReadMateriaPrimaDto> BuscaMPId(int id)
@@ -18,31 +21,19 @@ namespace CalculoProduto.Application.Services.Impl
             var materiaPrima = await _materiaPrimaRepository.BuscaMPId(id);
             if (materiaPrima == null) return null;
 
-            return new ReadMateriaPrimaDto
-            {
-                Id = materiaPrima.Id,
-                Nome = materiaPrima.Nome,
-                Qnts = materiaPrima.Qnts,
-                Valor = materiaPrima.Valor
-            };
+            return _mapper.Map<ReadMateriaPrimaDto>(materiaPrima);
         }
 
         public async Task CadastrarMP(CreateMateriaPrimaDto materiaPrimaDto)
         {
-            var novaMP = new MateriaPrima(materiaPrimaDto.Nome, materiaPrimaDto.Qnts, materiaPrimaDto.Valor);
+            var novaMP = _mapper.Map<MateriaPrima>(materiaPrimaDto);
             await _materiaPrimaRepository.AddAsync(novaMP);
         }
 
         public async Task<IEnumerable<ReadMateriaPrimaDto>> ListarMP()
         {
             var listaMateriaPrima = await _materiaPrimaRepository.Listar();
-            return listaMateriaPrima.Select(materiaPrima => new ReadMateriaPrimaDto
-            {
-                Id = materiaPrima.Id,
-                Nome = materiaPrima.Nome,
-                Qnts = materiaPrima.Qnts,
-                Valor = materiaPrima.Valor
-            }).ToList();
+            return _mapper.Map<List<ReadMateriaPrimaDto>>(listaMateriaPrima);
         }
     }
 }
