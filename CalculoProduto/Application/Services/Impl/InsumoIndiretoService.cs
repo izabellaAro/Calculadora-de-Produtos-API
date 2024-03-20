@@ -1,4 +1,5 @@
-﻿using CalculoProduto.DataAccess.Repositories;
+﻿using AutoMapper;
+using CalculoProduto.DataAccess.Repositories;
 using CalculoProduto.Entities;
 using CalculoProduto.Models.InsumoIndireto;
 
@@ -7,15 +8,17 @@ namespace CalculoProduto.Application.Services.Impl
     public class InsumoIndiretoService : IInsumoIndiretoService
     {
         private readonly IInsumoIndiretoRepository _insumoIndiretoRepository;
+        private readonly IMapper _mapper;
 
-        public InsumoIndiretoService(IInsumoIndiretoRepository insumoIndiretoRepository)
+        public InsumoIndiretoService(IInsumoIndiretoRepository insumoIndiretoRepository, IMapper mapper)
         {
             _insumoIndiretoRepository = insumoIndiretoRepository;
+            _mapper = mapper;
         }
 
         public async Task CadastraInsumoIndireto(CreateInsumoIndiretoDto insumoIndiretoDto)
         {
-            var novoInsumo = new InsumoIndireto(insumoIndiretoDto.Especificacao, insumoIndiretoDto.Valor);
+            var novoInsumo = _mapper.Map<InsumoIndireto>(insumoIndiretoDto);
             await _insumoIndiretoRepository.AddAsync(novoInsumo);
         }
 
@@ -24,23 +27,14 @@ namespace CalculoProduto.Application.Services.Impl
             var insumoIndireto = await _insumoIndiretoRepository.BuscaInsIndiretoId(id);
             if (insumoIndireto == null) return null;
 
-            return new ReadInsumoIndiretoDto
-            {
-                Id = insumoIndireto.Id,
-                Especificacao = insumoIndireto.Especificao,
-                Valor = insumoIndireto.Valor
-            };
+            return _mapper.Map<ReadInsumoIndiretoDto>(insumoIndireto);
         }
 
         public async Task<IEnumerable<ReadInsumoIndiretoDto>> ListaInsumoIndireto()
         {
             var listaInsumoIndireto = await _insumoIndiretoRepository.Listar();
-            return listaInsumoIndireto.Select(insumoIndireto => new ReadInsumoIndiretoDto
-            {
-                Id = insumoIndireto.Id,
-                Especificacao = insumoIndireto.Especificao,
-                Valor = insumoIndireto.Valor
-            }).ToList();
+
+            return _mapper.Map<List<ReadInsumoIndiretoDto>>(listaInsumoIndireto);
         }
     }
 }

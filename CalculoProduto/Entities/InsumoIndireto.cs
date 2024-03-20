@@ -3,7 +3,7 @@
     public class InsumoIndireto
     {
         public int Id { get; set; }
-        public string Especificao { get; set; }
+        public string Especificacao { get; set; }
         public double Valor { get; set; }
 
         public InsumoIndireto()
@@ -13,7 +13,7 @@
         
         public InsumoIndireto(string especificacao, double valor)
         {
-            Especificao = especificacao;
+            Especificacao = especificacao;
             Valor = valor;
         }
     }

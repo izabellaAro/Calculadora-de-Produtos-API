@@ -1,6 +1,5 @@
 ﻿using CalculoProduto.Application.Services;
 using CalculoProduto.Models.InsumoIndireto;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculoProduto.Controllers
@@ -10,7 +9,6 @@ namespace CalculoProduto.Controllers
     public class InsumoIndiretoController : ControllerBase
     {
         private readonly IInsumoIndiretoService _insumoIndiretoService;
-
         public InsumoIndiretoController(IInsumoIndiretoService insumoIndiretoService)
         {
             _insumoIndiretoService = insumoIndiretoService;

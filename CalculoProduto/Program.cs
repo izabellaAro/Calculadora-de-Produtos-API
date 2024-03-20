@@ -1,6 +1,7 @@
 using CalculoProduto.Application.Services;
 using CalculoProduto.Application.Services.Impl;
 using CalculoProduto.DataAccess;
+using CalculoProduto.DataAccess.Mappers;
 using CalculoProduto.DataAccess.Repositories;
 using CalculoProduto.DataAccess.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,9 @@ builder.Services.AddScoped<IMateriaPrimaRepository, MateriaPrimaRepository>();
 builder.Services.AddScoped<IInsumoIndiretoRepository, InsumoIndiretoRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IPreparacaoRepository, PreparacaoRepository>();
+
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(InsumoIndiretoProfile));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

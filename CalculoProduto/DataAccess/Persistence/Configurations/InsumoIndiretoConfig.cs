@@ -9,7 +9,7 @@ namespace CalculoProduto.DataAccess.Persistence.Configurations
         public void Configure(EntityTypeBuilder<InsumoIndireto> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Especificao).IsRequired();
+            builder.Property(x => x.Especificacao).IsRequired();
             builder.Property(x => x.Valor).IsRequired();
         }
     }
