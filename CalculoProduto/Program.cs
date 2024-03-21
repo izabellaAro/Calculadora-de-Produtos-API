@@ -28,6 +28,7 @@ builder.Services.AddScoped<IPreparacaoRepository, PreparacaoRepository>();
 builder.Services.AddAutoMapper(typeof(InsumoIndiretoProfile));
 builder.Services.AddAutoMapper(typeof(MateriaPrimaProfile));
 builder.Services.AddAutoMapper(typeof(ProdutoProfile));
+builder.Services.AddAutoMapper(typeof(PreparacaoProfile));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

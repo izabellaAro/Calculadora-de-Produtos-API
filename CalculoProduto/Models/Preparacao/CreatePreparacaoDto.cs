@@ -7,11 +7,11 @@
         public int ProdutoId { get; set; }
         public double ValorMaoObra { get; set; }
         public double PercentualLucro { get; set; }
-        public List<ItemPreparacaoDto> ItensPreparacao { get; set; }
-        public List<InsumoPreparacaoDto> InsumosPreparacao { get; set; }
+        public List<CreateItemPreparacaoDto> ItensPreparacao { get; set; }
+        public List<CreateInsumoPreparacaoDto> InsumosPreparacao { get; set; }
     }
 
-    public class ItemPreparacaoDto
+    public class CreateItemPreparacaoDto
     {
         public int Id { get; set; }
         public int MateriaPrimaId { get; set; }
@@ -19,7 +19,7 @@
         public double Valor { get; set; }
     }
 
-    public class InsumoPreparacaoDto
+    public class CreateInsumoPreparacaoDto
     {
         public int Id { get; set; }
         public int InsumoIndiretoId { get; set; }
