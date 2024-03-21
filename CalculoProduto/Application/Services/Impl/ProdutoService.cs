@@ -1,4 +1,4 @@
-﻿using CalculoProduto.Application.Services;
+﻿using AutoMapper;
 using CalculoProduto.DataAccess.Repositories;
 using CalculoProduto.Entities;
 using CalculoProduto.Models.Produto;
@@ -8,14 +8,16 @@ namespace CalculoProduto.Application.Services.Impl
     public class ProdutoService : IProdutoService
     {
         private readonly IProdutoRepository _produtoRepository;
-        public ProdutoService(IProdutoRepository produtoRepository)
+        private readonly IMapper _mapper;
+        public ProdutoService(IProdutoRepository produtoRepository, IMapper mapper)
         {
             _produtoRepository = produtoRepository;
+            _mapper = mapper;
         }
         
         public async Task CadastrarProduto(CreateProdutoDto produtoDto)
         {
-            var novoProduto = new Produto(produtoDto.Nome);
+            var novoProduto = _mapper.Map<Produto>(produtoDto);
             await _produtoRepository.AddAsync(novoProduto);
         }
 
@@ -24,21 +26,13 @@ namespace CalculoProduto.Application.Services.Impl
             var produto = await _produtoRepository.BuscaProdutoId(id);
             if (produto == null) return null;
 
-            return new ReadProdutoDto
-            {
-                Id = produto.Id,
-                Nome = produto.Nome
-            };
+            return _mapper.Map<ReadProdutoDto>(produto);
         }
 
         public async Task<IEnumerable<ReadProdutoDto>> ListaProdutos()
         {
             var listaProdutos = await _produtoRepository.Listar();
-            return listaProdutos.Select(produto => new ReadProdutoDto
-            {
-                Id = produto.Id,
-                Nome = produto.Nome
-            }).ToList();
+            return _mapper.Map<List<ReadProdutoDto>>(listaProdutos);
         }
     }
 }
