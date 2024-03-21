@@ -26,7 +26,7 @@ namespace CalculoProduto.Application.Services.Impl
 
         public async Task CadastrarMP(CreateMateriaPrimaDto materiaPrimaDto)
         {
-            var novaMP = _mapper.Map<MateriaPrima>(materiaPrimaDto);
+            var novaMP = new MateriaPrima(materiaPrimaDto.Nome, materiaPrimaDto.Qnts, materiaPrimaDto.Valor);
             await _materiaPrimaRepository.AddAsync(novaMP);
         }
 

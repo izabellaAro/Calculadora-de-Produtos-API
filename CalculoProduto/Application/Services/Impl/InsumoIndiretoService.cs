@@ -18,7 +18,7 @@ namespace CalculoProduto.Application.Services.Impl
 
         public async Task CadastraInsumoIndireto(CreateInsumoIndiretoDto insumoIndiretoDto)
         {
-            var novoInsumo = _mapper.Map<InsumoIndireto>(insumoIndiretoDto);
+            var novoInsumo = new InsumoIndireto(insumoIndiretoDto.Especificacao, insumoIndiretoDto.Valor);
             await _insumoIndiretoRepository.AddAsync(novoInsumo);
         }
 

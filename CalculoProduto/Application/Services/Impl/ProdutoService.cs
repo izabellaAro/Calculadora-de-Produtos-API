@@ -17,7 +17,7 @@ namespace CalculoProduto.Application.Services.Impl
         
         public async Task CadastrarProduto(CreateProdutoDto produtoDto)
         {
-            var novoProduto = _mapper.Map<Produto>(produtoDto);
+            var novoProduto = new Produto(produtoDto.Nome);
             await _produtoRepository.AddAsync(novoProduto);
         }
 
